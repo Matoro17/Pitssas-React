@@ -42,3 +42,8 @@ exports.marcarPedidoEnviado = async (req,res)=>{
     const response = await db.query('UPDATE pedidos SET enviado = $1 WHERE pedidoid = $2 ',[1,pedidoid]);
     res.status(200).send({ message: "Estado do pedido atualizado com sucesso para ENVIADO!" });
 };
+exports.marcarPedidoArquivado = async (req,res)=>{
+  const pedidoid = parseInt(req.params.id);
+  const response = await db.query('UPDATE pedidos SET arquivado = $1 WHERE pedidoid = $2 ',[1,pedidoid]);
+  res.status(200).send({ message: "Estado do pedido atualizado com sucesso para ARQUIVADO!" });
+};

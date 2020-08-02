@@ -13,4 +13,15 @@ exports.createCliente = async (req, res) => {
         user: { nome, bairro, rua, numero, referencia, identificador }
       },
     });
-  };
+};
+
+exports.findClienteById = async (req, res) => {
+    const clienteId = parseInt(req.params.id);
+    const response = await db.query('SELECT * FROM clientes WHERE clienteId = $1', [clienteId]);
+    res.status(200).send(response.rows);
+};
+exports.findClienteByIdentificador = async (req, res) => {
+  const identificador = parseInt(req.params.id);
+  const response = await db.query('SELECT * FROM clientes WHERE identificador = $1', [identificador]);
+  res.status(200).send(response.rows);
+};
