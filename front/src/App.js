@@ -6,8 +6,6 @@ import {
 
 import AppHeader from './components/AppHeader';
 import Home from './pages/Home';
-import CardPedido from './components/CardPedido';
-import ListaPedidos from './components/ListaPedidos';
 
 const styles = theme => ({
   main: {
