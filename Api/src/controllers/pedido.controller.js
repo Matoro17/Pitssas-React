@@ -1,6 +1,7 @@
 const db = require("../config/database");
-
-
+const io = require('socket.io');
+var socket = io();
+ 
 exports.createPedido = async (req, res) => {
     const { clienteid, subtotal, pedido, entrega, pagamento, troco, pronto, enviado, arquivado} = req.body;
     const { rows } = await db.query(
@@ -36,14 +37,17 @@ exports.marcarPedidoPronto = async (req,res)=>{
     const pedidoid = parseInt(req.params.id);
     const response = await db.query('UPDATE pedidos SET pronto = $1 WHERE pedidoid = $2 ',[1,pedidoid]);
     res.status(200).send({ message: "Estado do pedido atualizado com sucesso para PRONTO!" });
+    socket.emit("update-lista")
 };
 exports.marcarPedidoEnviado = async (req,res)=>{
     const pedidoid = parseInt(req.params.id);
     const response = await db.query('UPDATE pedidos SET enviado = $1 WHERE pedidoid = $2 ',[1,pedidoid]);
     res.status(200).send({ message: "Estado do pedido atualizado com sucesso para ENVIADO!" });
-};
+    socket.emit("update-lista")
+  };
 exports.marcarPedidoArquivado = async (req,res)=>{
   const pedidoid = parseInt(req.params.id);
   const response = await db.query('UPDATE pedidos SET arquivado = $1 WHERE pedidoid = $2 ',[1,pedidoid]);
   res.status(200).send({ message: "Estado do pedido atualizado com sucesso para ARQUIVADO!" });
+  socket.emit("update-lista")
 };
