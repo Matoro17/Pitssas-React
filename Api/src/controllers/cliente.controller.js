@@ -20,6 +20,11 @@ exports.findClienteById = async (req, res) => {
     const response = await db.query('SELECT * FROM clientes WHERE clienteId = $1', [clienteId]);
     res.status(200).send(response.rows);
 };
+
+exports.getAllClientes = async (req, res) => {
+  const response = await db.query('SELECT * FROM clientes');
+  res.status(200).send(response.rows);
+};
 exports.findClienteByIdentificador = async (req, res) => {
   const identificador = parseInt(req.params.id);
   const response = await db.query('SELECT * FROM clientes WHERE identificador = $1', [identificador]);
