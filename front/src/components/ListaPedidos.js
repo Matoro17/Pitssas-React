@@ -11,7 +11,7 @@ class ListaPedidos extends Component {
     super();
     this.state = {
       isLoading: false,
-      colunaNew: new ColunaPedidos,
+      colunaNew: new ColunaPedidos(),
     };
   }
 
